@@ -1,4 +1,6 @@
 export const Tabs = ({ tabs, activeTabId, onTabSelected }) => {
+  const tabContent = tabs.find(tab => tab.id === activeTabId);
+
   return (
     <div data-cy="TabsComponent">
       <div className="tabs is-boxed">
@@ -17,7 +19,8 @@ export const Tabs = ({ tabs, activeTabId, onTabSelected }) => {
 
                   // chama onTabSelected somente se o li (parentNode) nao contem a classe 'is-active'
                   if (!listItem.classList.contains('is-active')) {
-                    onTabSelected(tab.id, tab.content, event);
+                    // onTabSelected(tab.id, tab.content, event);
+                    onTabSelected(tab.id);
                   }
                 }}
               >
@@ -29,7 +32,7 @@ export const Tabs = ({ tabs, activeTabId, onTabSelected }) => {
       </div>
 
       <div className="block" data-cy="TabContent">
-        {tabs.find(tab => tab.id === activeTabId)?.content || tabs[0].content}
+        {tabContent.content}
       </div>
     </div>
   );
